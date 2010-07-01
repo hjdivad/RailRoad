@@ -73,9 +73,9 @@ class ModelsDiagram < AppDiagram
 
         # Collect model's content columns
 
-	content_columns = current_class.content_columns
+        content_columns = current_class.content_columns
 	
-	if @options.hide_magic 
+        if @options.hide_magic 
           # From patch #13351
           # http://wiki.rubyonrails.org/rails/pages/MagicFieldNames
           magic_fields = [
@@ -146,7 +146,7 @@ class ModelsDiagram < AppDiagram
       assoc_name = assoc.name.to_s
     end 
 
-    if assoc.macro.to_s == 'has_one' 
+    if ['has_one', 'belongs_to'].include? assoc.macro.to_s
       assoc_type = 'one-one'
     elsif assoc.macro.to_s == 'has_many' && (! assoc.options[:through])
       assoc_type = 'one-many'

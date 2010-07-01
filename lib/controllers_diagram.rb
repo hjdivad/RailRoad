@@ -43,7 +43,7 @@ class ControllersDiagram < AppDiagram
       # ApplicationController must be loaded first
       require APP_CONTROLLER
       files = Dir.glob("app/controllers/**/*_controller.rb") - @options.exclude
-      files.each {|c| require c }
+      files.each {|c| require "./#{c}" }
       enable_stdout
     rescue LoadError
       enable_stdout

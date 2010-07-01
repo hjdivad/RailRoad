@@ -37,7 +37,7 @@ class ModelsDiagram < AppDiagram
       files = Dir.glob("app/models/**/*.rb")
       files += Dir.glob("vendor/plugins/**/app/models/*.rb") if @options.plugins_models
       files -= @options.exclude
-      files.each {|m| require m }
+      files.each {|m| require "./#{m}" }
       enable_stdout
     rescue LoadError
       enable_stdout

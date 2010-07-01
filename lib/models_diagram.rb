@@ -24,7 +24,15 @@ class ModelsDiagram < AppDiagram
     files += Dir.glob("vendor/plugins/**/app/models/*.rb") if @options.plugins_models    
     files -= @options.exclude
     files.each do |f| 
-      process_class extract_class_name(f).constantize
+		begin
+		  process_class extract_class_name(f).constantize
+		rescue => err
+			STDERR.puts "Error processing #{f}"
+			if @options.verbose
+				STDERR.puts err.message
+				STDERR.puts err.backtrace.join( "\n" )
+			end
+		end
     end
   end 
 
